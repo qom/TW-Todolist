@@ -18,14 +18,13 @@ type: text/vnd.tiddlywiki
 \end
  
 \define todolist-add-journal()
-<$button class="tc-btn-invisible" tooltip="Add new item">
+<$button class="tc-btn-invisible" tooltip="Add new item" actions=<<todolist-add-journal-action>> >
 	{{$:/core/images/new-button}}
-	<<todolist-add-journal-action>>
 </$button>
 \end
 
 \define todolist-add-journal-action()
-  <$list filter="[<stateTiddler>getindex[itemtext]!is[blank]]" variable=ignor>
+  
 	<$set name=item value=<<now "[UTC]YYYY0MM0DD0hh0mm0ssXXX">> >
 	<$action-setfield 
 	 $tiddler=<<taskTiddler>>
@@ -34,7 +33,7 @@ type: text/vnd.tiddlywiki
 	/>
 	</$set>
 	<$action-setfield $tiddler=<<stateTiddler>> $index="itemtext" $value=""/>
-	</$list>
+	
 \end
 
 \define todolist-cancel-journal-action()
