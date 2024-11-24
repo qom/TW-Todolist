@@ -1,6 +1,5 @@
 \define todolist-show-task()
 <$keyboard key="ctrl+enter" actions=<<tdl-kbd-action>> >
-<$keyboard key="ctrl+shift+enter" actions=<<tdl-kbd-pushjournal-action>> >
 <$list filter="[<stateTiddler>getindex[editview]match[edit]]" 
   emptyMessage="""<$macrocall $name="view-task" dataTiddler=<<taskTiddler>> />""" >
 <$edit-text 
@@ -10,6 +9,7 @@
  autoHeight=yes
  minHeight=0px
  class="kk-todolist-input-textbox"
+ inputActions=<<tdl-set-task-index-being-edited>>
  />
 </$list>
 </$keyboard>
@@ -22,14 +22,7 @@
 <$list filter="[<taskTiddler>getindex<item>]" variable="journalentry">
 	<$transclude $variable="appendjournal" timestamp={{{ [<taskTiddler>indexes[]match<item>format:date[0hh:0mm:0ss]] }}} entry=<<journalentry>> taskTiddler=<<taskTiddler>> />
 </$list>
-\end
 
-
-\define tdl-kbd-pushjournal-action()
-   
-<$list filter="[<taskTiddler>getindex<item>]" variable="journalentry">
-	<$transclude $variable="appendjournal" timestamp={{{ [<taskTiddler>indexes[]match<item>format:date[0hh:0mm:0ss]] }}} entry=<<journalentry>> taskTiddler=<<taskTiddler>> />
-</$list>
 \end
 
 \define view-task(dataTiddler)
@@ -37,4 +30,8 @@
 <$reveal type="match" stateTitle=<<stateTiddler>> stateIndex="timestamp" text="show">
 <span class="kk-todolist-date"> <$view tiddler=<<item>> field="title" format="date" template="mmm 0DD, YYYY 0hh:0mm"/></span>
 </$reveal>
+\end
+
+\define tdl-set-task-index-being-edited(actionValue)
+	<$action-setfield $tiddler=<<stateTiddler>> $index="edited-index" $value=<<item>> />
 \end

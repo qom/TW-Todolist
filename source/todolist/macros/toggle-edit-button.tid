@@ -9,8 +9,19 @@ type: text/vnd.tiddlywiki
 </$button>
 </$reveal>
 <$reveal type="match" stateTitle=<<stateTiddler>> stateIndex="editview"  text="edit">
-<$button class="tc-btn-invisible" setTitle=<<stateTiddler>> setIndex="editview" setTo="view" tooltip="Save items">
+<$button class="tc-btn-invisible" setTitle=<<stateTiddler>> setIndex="editview" setTo="view" tooltip="Save items" actions=<<tdl-done-button-action>> >
 {{$:/core/images/done-button}}
 </$button>
 </$reveal>
+\end
+
+\define tdl-done-button-action()
+
+<$list filter="[<stateTiddler>getindex[edited-index]]" variable="editedIndex">
+
+    <$list filter="[<taskTiddler>getindex<editedIndex>]" variable="journalentry">
+        <$transclude $variable="appendjournal" timestamp={{{ [<stateTiddler>getindex[edited-index]format:date[0hh:0mm:0ss]] }}} entry=<<journalentry>> taskTiddler=<<taskTiddler>> />
+    </$list>
+
+</$list>
 \end

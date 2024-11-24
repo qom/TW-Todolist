@@ -49,25 +49,29 @@ Append an interstitial journal entry to a tiddler
     function appendEntryToLogSectionOfTiddler(timestamp, entry, currentText, tiddlerTitle, journalTiddler) {
         
         // Find the first bullet point entry in 'Log' section of tiddler
-        var matchResult = currentText.match(/([!]+[ ]*Log.*\n[^]*?)(\* .*)/);
     
-        // Check if the journal entry was already added to the Log section, in which case it needs to be updated.
-        var existingEntryPattern = new RegExp("(\\* \\[\\[" + journalTiddler + "\\]\\] " + timestamp + " - )(.*)")
-        var matchExistingLogEntryResult = currentText.match(existingEntryPattern);
+        var matchResult = null;
+        if (currentText != null) {
+            
+            matchResult = currentText.match(/([!]+[ ]*Log.*\n[^]*?)(\* .*)/);
     
-        // Remove the name of the tiddler we're inserting into from the entry 
-        var pattern = "\\[\\[" + tiddlerTitle + ".*\\]\\] - "; 
-        var entryText = entry.replace(new RegExp(pattern), '');
-    
-        // If entry is multi-line surround content after line one in divs 
-        if (entryText.indexOf("\n") != -1) { 
-            entryText = entryText.replace(/\n/," <div>\n"); 
-            entryText += "\n</div>"; 
-        }
-    
-        // Prepend entry with link to Journal tiddler. 
-        var fullLogEntry = "* [[" + journalTiddler + "]] " + timestamp + " - " + entryText;
+            // Check if the journal entry was already added to the Log section, in which case it needs to be updated.
+            var existingEntryPattern = new RegExp("(\\* \\[\\[" + journalTiddler + "\\]\\] " + timestamp + " - )(.*)")
+            var matchExistingLogEntryResult = currentText.match(existingEntryPattern);
         
+            // Remove the name of the tiddler we're inserting into from the entry 
+            var pattern = "\\[\\[" + tiddlerTitle + ".*\\]\\] - "; 
+            var entryText = entry.replace(new RegExp(pattern), '');
+        
+            // If entry is multi-line surround content after line one in divs 
+            if (entryText.indexOf("\n") != -1) { 
+                entryText = entryText.replace(/\n/," <div>\n"); 
+                entryText += "\n</div>"; 
+            }
+        
+            // Prepend entry with link to Journal tiddler. 
+            var fullLogEntry = "* [[" + journalTiddler + "]] " + timestamp + " - " + entryText;
+        }
         // If entry is multi-line surround content after line one in divs 
         /*
         if (fullLogEntry.indexOf("\n") != -1) { 
