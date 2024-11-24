@@ -26,11 +26,17 @@ type: text/vnd.tiddlywiki
 \define todolist-add-journal-action()
   
 	<$set name=item value=<<now "[UTC]YYYY0MM0DD0hh0mm0ssXXX">> >
-	<$action-setfield 
-	 $tiddler=<<taskTiddler>>
-	 $index=<<item>>
-	 $value={{{ [<stateTiddler>getindex[itemtext]] }}}
-	/>
+    <$action-setfield 
+      $tiddler=<<taskTiddler>>
+      $index=<<item>>
+      $value={{{ [<stateTiddler>getindex[itemtext]] }}}
+    />
+    <$transclude 
+      $variable="appendjournal" 
+      timestamp=<<now "0hh:0mm:0ss">>
+      entry={{{ [<stateTiddler>getindex[itemtext]] }}}
+      taskTiddler=<<taskTiddler>> 
+    />
 	</$set>
 	<$action-setfield $tiddler=<<stateTiddler>> $index="itemtext" $value=""/>
 	
