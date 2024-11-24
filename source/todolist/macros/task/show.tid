@@ -17,7 +17,6 @@ type: text/vnd.tiddlywiki
  />
 </$list>
 </$keyboard>
-</$keyboard>
 \end
 
 \define tdl-kbd-action()
