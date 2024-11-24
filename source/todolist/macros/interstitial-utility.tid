@@ -55,7 +55,7 @@
 \whitespace trim
 <$list filter="[<taskTiddler>indexes[]]" variable="item">
 <div class="kk-todolist-row">
-  <div class="kk-todolist-done" style="width:2.6em"><b><$view tiddler=<<item>> field=title format=date template="0hh:0mm"/></b></div>
+  <div class="kk-todolist-time"><$view tiddler=<<item>> field=title format=date template="0hh:0mm"/></div>
   <div class="kk-todolist-desc"><<todolist-show-task>></div>
 </div>
 </$list>
@@ -65,7 +65,7 @@
 <!-- this macro is the same as disp-list-in-edit-mode -->
 <$list filter="[<taskTiddler>indexes[]]" variable="item">
 <div class="kk-todolist-row">
-  <div class="kk-todolist-done" style="width:2.6em"><b><$view tiddler=<<item>> field=title format=date template="0hh:0mm"/></b></div>
+  <div class="kk-todolist-time"><$view tiddler=<<item>> field=title format=date template="0hh:0mm"/></div>
   <div class="kk-todolist-desc"><<todolist-show-task>></div>
   <div class="kk-todolist-delete"><$macrocall $name="todolist-delete-journal" dataTiddler=<<taskTiddler>>/></div>
 </div>

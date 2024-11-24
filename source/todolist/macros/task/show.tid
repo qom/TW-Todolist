@@ -1,3 +1,7 @@
+tags: $:/tags/Todolist/Macro
+title: $:/plugins/kookma/todolist/macros/task/show
+type: text/vnd.tiddlywiki
+
 \define todolist-show-task()
 <$keyboard key="ctrl+enter" actions=<<tdl-kbd-action>> >
 <$list filter="[<stateTiddler>getindex[editview]match[edit]]" 
