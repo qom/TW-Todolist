@@ -35,7 +35,12 @@
 	flex-grow:1; 
 	width: calc(100% - 50px); 
 	padding-left: 10px;
-	padding-right: 10px;
+	padding-right: 10px;	
+}
+
+.kk-todolist-row .kk-todolist-desc p {
+	margin-top: 0px;
+	margin-bottom: 0px;
 }
 
 .kk-todolist-row .kk-todolist-priority{

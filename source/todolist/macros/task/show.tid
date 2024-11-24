@@ -3,13 +3,15 @@ title: $:/plugins/kookma/todolist/macros/task/show
 type: text/vnd.tiddlywiki
 
 \define todolist-show-task()
-<$keyboard key="enter" actions=<<tdl-kbd-action>> >
+<$keyboard key="ctrl+enter" actions=<<tdl-kbd-action>> >
 <$list filter="[<stateTiddler>getindex[editview]match[edit]]" 
   emptyMessage="""<$macrocall $name="view-task" dataTiddler=<<taskTiddler>> />""" >
 <$edit-text 
  tiddler=<<taskTiddler>>
  index=<<item>>
- tag=input
+ tag=textarea
+ autoHeight=yes
+ minHeight=0px
  class="kk-todolist-input-textbox"
  />
 </$list>
@@ -21,7 +23,7 @@ type: text/vnd.tiddlywiki
 \end
 
 \define view-task(dataTiddler)
-<$transclude tiddler=<<__dataTiddler__>> index=<<item>>/>
+<$transclude tiddler=<<__dataTiddler__>> index=<<item>> mode="block"/>
 <$reveal type="match" stateTitle=<<stateTiddler>> stateIndex="timestamp" text="show">
 <span class="kk-todolist-date"> <$view tiddler=<<item>> field="title" format="date" template="mmm 0DD, YYYY 0hh:0mm"/></span>
 </$reveal>

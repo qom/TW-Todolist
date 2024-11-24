@@ -4,11 +4,11 @@ type: text/vnd.tiddlywiki
 
 \define todolist-input-journal()
 <$keyboard key="escape" actions=<<todolist-cancel-journal-action>>   >
-<$keyboard key="enter"  actions=<<todolist-add-journal-action>> >
+<$keyboard key="ctrl+enter"  actions=<<todolist-add-journal-action>> >
 <$edit-text 
  tiddler=<<stateTiddler>> 
  index="itemtext" 
- tag="input"
+ tag="textarea"
  class="kk-todolist-input-textbox"
  placeholder="add new item"
  default="" minHeight="1em" focus="yes"
