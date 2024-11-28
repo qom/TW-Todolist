@@ -28,6 +28,9 @@ Append an interstitial journal entry to a tiddler
     Run the macro
     */
     exports.run = function(timestamp, entry, taskTiddler) {
+        if (entry === "") {
+            return;
+        }
         var tiddler = $tw.wiki.getTiddler(extractTiddlerName(entry)),
         updateFields = {
             title: tiddler.fields.title
