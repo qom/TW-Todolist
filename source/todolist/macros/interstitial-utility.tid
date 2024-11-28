@@ -1,7 +1,3 @@
-tags: 
-title: $:/plugins/kookma/todolist/macros/interstitial-utility
-type: text/vnd.tiddlywiki
-
 \define todolist-input-journal()
 <$keyboard key="escape" actions=<<todolist-cancel-journal-action>>   >
 <$keyboard key="ctrl+enter"  actions=<<todolist-add-journal-action>> >
@@ -13,6 +9,20 @@ type: text/vnd.tiddlywiki
  placeholder="add new item"
  default="" minHeight="1em" focus="yes"
  />
+
+<$reveal type="popup"  position="belowright" state={{{ [<currentTiddler>addprefix[$:/state/popup/insertLink/]] }}} >
+
+<div class="tc-insert-link-popup">
+
+__Insert link__
+
+ <$list filter="[[$:/state/tiddlerLinks]get[text]split[,]trim[]]" >
+    
+        <$button class="tc-insert-link" actions="""<$action-setfield $tiddler=<<stateTiddler>> $index="itemtext" $value={{{ [<stateTiddler>getindex[itemtext]else[]addsuffix[ ]addsuffix<currentTiddler>] }}}/>""">{{$:/core/images/new-here-button}}</$button> <<currentTiddler>>
+  </$list>
+</div>
+</$reveal>
+
 </$keyboard> 
 </$keyboard> 
 \end
