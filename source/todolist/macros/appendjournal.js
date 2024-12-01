@@ -28,11 +28,11 @@ Append an interstitial journal entry to a tiddler
     Run the macro
     */
     exports.run = function(timestamp, entry, taskTiddler) {
-        if (entry === "") {
+        var tiddler = $tw.wiki.getTiddler(extractTiddlerName(entry));
+        if (tiddler == null) {
             return;
         }
-        var tiddler = $tw.wiki.getTiddler(extractTiddlerName(entry)),
-        updateFields = {
+        var updateFields = {
             title: tiddler.fields.title
         };
     
@@ -112,7 +112,11 @@ Append an interstitial journal entry to a tiddler
     function extractTiddlerName(entry) {
         // Extract tiddler name from [[Tiddler]] or [[Tiddler|Alias]]
         var matches = entry.matchAll(/\[\[([^|\]]*)[|]?.*?\]\]/g);
-        return matches.next().value[1];
+        const firstTiddler = matches.next();
+        if (firstTiddler.value != undefined) {
+            return firstTiddler.value[1]
+        }
+        return null;
     }
         
     })();
